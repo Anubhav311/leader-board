@@ -19,7 +19,7 @@ export default function Home() {
           <tr>
             <th>S. No.</th>
             <th>Name</th>
-            <th>Commits</th>
+            <th>PR Merge</th>
             <th>Rank</th>
           </tr>
           <tr>
