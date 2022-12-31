@@ -13,7 +13,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <div>
-          <h3>Leader Board</h3>
+          <h3>Epvi Engineering Leader Board</h3>
         </div>
         <table>
           <tr>
