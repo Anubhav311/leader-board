@@ -23,6 +23,12 @@ export default function Home() {
             <th>Rank</th>
           </tr>
           <tr>
+            <td>3</td>
+            <td>Sagar</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
             <td>1</td>
             <td>Vicky</td>
             <td>0</td>
@@ -31,12 +37,6 @@ export default function Home() {
           <tr>
             <td>2</td>
             <td>Vikash</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Sagar</td>
             <td>0</td>
             <td>0</td>
           </tr>
