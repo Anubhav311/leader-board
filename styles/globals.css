@@ -24,3 +24,12 @@ a {
     background: black;
   }
 }
+
+table, th, td {
+  /* border: 1px solid black; */
+  padding: 0 5px;
+  /* text-align: center; */
+}
+table {
+  border-spacing: 15px;
+}
