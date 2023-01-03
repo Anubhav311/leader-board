@@ -1,8 +1,49 @@
+import { useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
+const membersList = [
+  {
+    name: "Vicky",
+    prMerge: 0,
+  },
+  {
+    name: "Sagar",
+    prMerge: 0,
+  },
+  {
+    name: "Vikash",
+    prMerge: 1,
+  },
+  {
+    name: "Harsh",
+    prMerge: 0,
+  },
+  {
+    name: "Saransh",
+    prMerge: 0,
+  },
+];
+
+function bubbleSort(membersList) {
+  for (let i = 0; i < membersList.length; i++) {
+    for (let j = 0; j < membersList.length - i - 1; j++) {
+      if (membersList[j + 1].prMerge >= membersList[j].prMerge) {
+        [membersList[j + 1], membersList[j]] = [
+          membersList[j],
+          membersList[j + 1],
+        ];
+      }
+    }
+  }
+  return membersList;
+}
+
+bubbleSort(membersList);
+
 export default function Home() {
+  const [members, setMembers] = useState(membersList);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,58 +56,27 @@ export default function Home() {
         <div>
           <h3>Epvi Engineering Leader Board</h3>
         </div>
-        <table>
-          <tr>
-            <th>S. No.</th>
-            <th>Name</th>
-            <th>PR Merge</th>
-            <th>Rank</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Sagar</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Vicky</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Vikash</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Saransh</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Harsh</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-        </table>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>S. No.</th>
+                <th>PR Merge</th>
+              </tr>
+            </thead>
+            <tbody>
+              {members.map((member, i) => (
+                <tr key={i}>
+                  <td style={{textAlign: "center"}}>{i + 1}</td>
+                  <td>{member.name}</td>
+                  <td style={{textAlign: "center"}} >{member.prMerge}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   );
 }
