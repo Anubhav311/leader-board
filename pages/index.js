@@ -9,7 +9,7 @@ const membersList = [
   },
   {
     name: "Sagar",
-    prMerge: 0,
+    prMerge: 1,
   },
   {
     name: "Vikash",
