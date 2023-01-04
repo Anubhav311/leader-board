@@ -6,22 +6,37 @@ const membersList = [
   {
     name: "Vicky",
     prMerge: 0,
+    typeingSpeed: 0,
+    keyboardOrMouse: "Mouse",
+    leetcodeScore: 0,
   },
   {
     name: "Sagar",
-    prMerge: 0,
+    prMerge: 1,
+    typeingSpeed: 0,
+    keyboardOrMouse: "Mouse",
+    leetcodeScore: 0,
   },
   {
     name: "Vikash",
     prMerge: 1,
+    typeingSpeed: 0,
+    keyboardOrMouse: "Mouse",
+    leetcodeScore: 0,
   },
   {
     name: "Harsh",
     prMerge: 0,
+    typeingSpeed: 0,
+    keyboardOrMouse: "Mouse",
+    leetcodeScore: 0,
   },
   {
     name: "Saransh",
     prMerge: 0,
+    typeingSpeed: 0,
+    keyboardOrMouse: "Mouse",
+    leetcodeScore: 0,
   },
 ];
 
@@ -54,27 +69,35 @@ export default function Home() {
 
       <main className={styles.main}>
         <div>
-          <h3>Epvi Engineering Leader Board</h3>
-        </div>
-        <div>
-          <table>
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>S. No.</th>
-                <th>PR Merge</th>
-              </tr>
-            </thead>
-            <tbody>
-              {members.map((member, i) => (
-                <tr key={i}>
-                  <td style={{textAlign: "center"}}>{i + 1}</td>
-                  <td>{member.name}</td>
-                  <td style={{textAlign: "center"}} >{member.prMerge}</td>
+          <div>
+            <h3>Epvi Engineering Leader Board</h3>
+          </div>
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Name</th>
+                  <th>Typeing Speed</th>
+                  <th>Keyboard or Mouse</th>
+                  <th>Leetcode Score</th>
+                  <th>PR Merge</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {members.map((member, i) => (
+                  <tr key={i}>
+                    <td style={{ textAlign: "center", fontSize: '18px', fontWeight: 'bold' }}>{i + 1}</td>
+                    <td>{member.name}</td>
+                    <td style={{ textAlign: "center" }}>{member.typeingSpeed}</td>
+                    <td style={{ textAlign: "center" }}>{member.keyboardOrMouse}</td>
+                    <td style={{ textAlign: "center" }}>{member.leetcodeScore}</td>
+                    <td style={{ textAlign: "center", fontSize: '18px', fontWeight: 'bold' }}>{member.prMerge}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </main>
     </div>
