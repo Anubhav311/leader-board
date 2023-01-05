@@ -88,11 +88,11 @@ export default function Home() {
                 {members.map((member, i) => (
                   <tr key={i}>
                     <td style={{ textAlign: "center", fontSize: '18px', fontWeight: 'bold' }}>{i + 1}</td>
+                    <td style={{ textAlign: "center", fontSize: '18px', fontWeight: 'bold' }}>{member.prMerge}</td>
                     <td>{member.name}</td>
                     <td style={{ textAlign: "center" }}>{member.typeingSpeed}</td>
                     <td style={{ textAlign: "center" }}>{member.keyboardOrMouse}</td>
                     <td style={{ textAlign: "center" }}>{member.leetcodeScore}</td>
-                    <td style={{ textAlign: "center", fontSize: '18px', fontWeight: 'bold' }}>{member.prMerge}</td>
                   </tr>
                 ))}
               </tbody>
