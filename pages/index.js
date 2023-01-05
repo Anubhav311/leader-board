@@ -13,14 +13,14 @@ const membersList = [
   {
     name: "Sagar",
     prMerge: 1,
-    typeingSpeed: 0,
+    typeingSpeed: 16,
     keyboardOrMouse: "Mouse",
     leetcodeScore: 0,
   },
   {
     name: "Vikash",
     prMerge: 1,
-    typeingSpeed: 0,
+    typeingSpeed: 11,
     keyboardOrMouse: "Mouse",
     leetcodeScore: 0,
   },
