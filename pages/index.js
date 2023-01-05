@@ -12,7 +12,7 @@ const membersList = [
   },
   {
     name: "Sagar",
-    prMerge: 1,
+    prMerge: 2,
     typeingSpeed: 16,
     keyboardOrMouse: "Mouse",
     leetcodeScore: 0,
