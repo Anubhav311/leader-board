@@ -19,7 +19,7 @@ const membersList = [
   },
   {
     name: "Vikash",
-    prMerge: 2,
+    prMerge: 3,
     typeingSpeed: 11,
     keyboardOrMouse: "Mouse",
     leetcodeScore: 0,
