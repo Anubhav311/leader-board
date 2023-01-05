@@ -77,11 +77,11 @@ export default function Home() {
               <thead>
                 <tr>
                   <th>Rank</th>
+                  <th>PR Merge</th>
                   <th>Name</th>
                   <th>Typeing Speed</th>
                   <th>Keyboard or Mouse</th>
                   <th>Leetcode Score</th>
-                  <th>PR Merge</th>
                 </tr>
               </thead>
               <tbody>
