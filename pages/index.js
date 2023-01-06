@@ -7,35 +7,35 @@ const membersList = [
     name: "Vicky",
     prMerge: 3,
     typeingSpeed: 0,
-    keyboardOrMouse: "Mouse",
+    keyboardOrMouse: "Low",
     leetcodeScore: 0,
   },
   {
     name: "Sagar",
     prMerge: 3,
     typeingSpeed: 16,
-    keyboardOrMouse: "Mouse",
+    keyboardOrMouse: "Low",
     leetcodeScore: 0,
   },
   {
     name: "Vikash",
     prMerge: 3,
     typeingSpeed: 11,
-    keyboardOrMouse: "Mouse",
+    keyboardOrMouse: "Low",
     leetcodeScore: 0,
   },
   {
     name: "Harsh",
     prMerge: 0,
     typeingSpeed: 0,
-    keyboardOrMouse: "Mouse",
+    keyboardOrMouse: "Low",
     leetcodeScore: 0,
   },
   {
     name: "Saransh",
     prMerge: 0,
     typeingSpeed: 0,
-    keyboardOrMouse: "Mouse",
+    keyboardOrMouse: "Low",
     leetcodeScore: 0,
   },
 ];
@@ -80,7 +80,7 @@ export default function Home() {
                   <th>PR Merge</th>
                   <th>Name</th>
                   <th>Typeing Speed</th>
-                  <th>Keyboard or Mouse</th>
+                  <th>Keyboard Use</th>
                   <th>Leetcode Score</th>
                 </tr>
               </thead>
