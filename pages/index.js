@@ -5,7 +5,7 @@ import styles from "../styles/Home.module.css";
 const membersList = [
   {
     name: "Vicky",
-    prMerge: 2,
+    prMerge: 3,
     typeingSpeed: 0,
     keyboardOrMouse: "Mouse",
     leetcodeScore: 0,
