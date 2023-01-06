@@ -6,7 +6,7 @@ const membersList = [
   {
     name: "Vicky",
     prMerge: 3,
-    typeingSpeed: 0,
+    typeingSpeed: 26,
     keyboardOrMouse: "Low",
     leetcodeScore: 0,
   },
