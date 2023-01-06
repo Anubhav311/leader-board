@@ -5,14 +5,14 @@ import styles from "../styles/Home.module.css";
 const membersList = [
   {
     name: "Vicky",
-    prMerge: 0,
+    prMerge: 2,
     typeingSpeed: 0,
     keyboardOrMouse: "Mouse",
     leetcodeScore: 0,
   },
   {
     name: "Sagar",
-    prMerge: 2,
+    prMerge: 3,
     typeingSpeed: 16,
     keyboardOrMouse: "Mouse",
     leetcodeScore: 0,
