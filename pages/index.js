@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import { getUser } from "../database/database";
 
 const membersList = [
   {
@@ -58,7 +59,16 @@ bubbleSort(membersList);
 
 export default function Home() {
   const [members, setMembers] = useState(membersList);
+  const [list, setList] = useState([]);
 
+  useEffect(() => {
+    getUser(setList);
+  }, []);
+
+  return <LeaderBoard members={members} />;
+}
+
+function LeaderBoard(members) {
   return (
     <div className={styles.container}>
       <Head>
@@ -85,14 +95,36 @@ export default function Home() {
                 </tr>
               </thead>
               <tbody>
-                {members.map((member, i) => (
+                {members.members.map((member, i) => (
                   <tr key={i}>
-                    <td style={{ textAlign: "center", fontSize: '18px', fontWeight: 'bold' }}>{i + 1}</td>
-                    <td style={{ textAlign: "center", fontSize: '18px', fontWeight: 'bold' }}>{member.prMerge}</td>
+                    <td
+                      style={{
+                        textAlign: "center",
+                        fontSize: "18px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {i + 1}
+                    </td>
+                    <td
+                      style={{
+                        textAlign: "center",
+                        fontSize: "18px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {member.prMerge}
+                    </td>
                     <td>{member.name}</td>
-                    <td style={{ textAlign: "center" }}>{member.typeingSpeed}</td>
-                    <td style={{ textAlign: "center" }}>{member.keyboardOrMouse}</td>
-                    <td style={{ textAlign: "center" }}>{member.leetcodeScore}</td>
+                    <td style={{ textAlign: "center" }}>
+                      {member.typeingSpeed}
+                    </td>
+                    <td style={{ textAlign: "center" }}>
+                      {member.keyboardOrMouse}
+                    </td>
+                    <td style={{ textAlign: "center" }}>
+                      {member.leetcodeScore}
+                    </td>
                   </tr>
                 ))}
               </tbody>
