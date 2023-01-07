@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { getUser } from "../database/database";
+import { getUser, getUsers } from "../database/database";
+import { useAuth } from "../context/AuthContext";
 
 const membersList = [
   {
@@ -58,14 +59,28 @@ function bubbleSort(membersList) {
 bubbleSort(membersList);
 
 export default function Home() {
+  const { currentUser, loading } = useAuth();
   const [members, setMembers] = useState(membersList);
   const [list, setList] = useState([]);
-
+  // console.log(currentUser)
   useEffect(() => {
-    getUser(setList);
-  }, []);
+    // getUsers(setList);
+    console.log(loading)
+    if (loading == false) {
+      console.log('false')
+      console.log(currentUser)
+      getUser(currentUser.uid)
+    }
+  }, [loading]);
 
-  return <LeaderBoard members={members} />;
+  return <GetTeams uid={currentUser?.uid} members={members} />;
+}
+
+function GetTeams({uid, members}) {
+  useEffect(() => {
+    // getUser(uid?.uid)
+  }, [])
+  return <LeaderBoard members={members}/>
 }
 
 function LeaderBoard(members) {
