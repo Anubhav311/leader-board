@@ -26,7 +26,7 @@ const membersList = [
   },
   {
     name: "Harsh",
-    prMerge: 0,
+    prMerge: 1,
     typeingSpeed: 0,
     keyboardOrMouse: "Low",
     leetcodeScore: 0,
