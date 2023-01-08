@@ -1,8 +1,27 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { getUser, getUsers } from "../database/database";
+import {
+  getUser,
+  getUsers,
+  getTeams,
+  getTeamMembers,
+} from "../database/database";
 import { useAuth } from "../context/AuthContext";
+import Modal from "react-modal";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 
 const membersList = [
   {
@@ -60,30 +79,45 @@ bubbleSort(membersList);
 
 export default function Home() {
   const { currentUser, loading } = useAuth();
+  const [userData, setUserData] = useState();
   const [members, setMembers] = useState(membersList);
   const [list, setList] = useState([]);
+  const uid = currentUser.uid;
   // console.log(currentUser)
   useEffect(() => {
-    // getUsers(setList);
-    console.log(loading)
     if (loading == false) {
-      console.log('false')
-      console.log(currentUser)
-      getUser(currentUser.uid)
+      getUser(uid, setUserData);
     }
   }, [loading]);
 
-  return <GetTeams uid={currentUser?.uid} members={members} />;
+  return userData == undefined ? (
+    <Loading />
+  ) : (
+    <GetTeams uid={uid} members={members} userData={userData} />
+  );
 }
 
-function GetTeams({uid, members}) {
+function GetTeams({ uid, members, userData }) {
+  const [teams, setTeams] = useState([]);
   useEffect(() => {
-    // getUser(uid?.uid)
-  }, [])
-  return <LeaderBoard members={members}/>
+    getTeams(uid, setTeams);
+  }, []);
+
+  return teams.length == 0 ? (
+    <Loading />
+  ) : (
+    <LeaderBoard members={members} team={teams[0]} />
+  );
 }
 
-function LeaderBoard(members) {
+function LeaderBoard({ members, team }) {
+  // function LeaderBoard(members, team) {
+  const [teamMembers, setTeamMembers] = useState([]);
+
+  useEffect(() => {
+    getTeamMembers(team, setTeamMembers);
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -107,40 +141,12 @@ function LeaderBoard(members) {
                   <th>Typeing Speed</th>
                   <th>Keyboard Use</th>
                   <th>Leetcode Score</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-                {members.members.map((member, i) => (
-                  <tr key={i}>
-                    <td
-                      style={{
-                        textAlign: "center",
-                        fontSize: "18px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {i + 1}
-                    </td>
-                    <td
-                      style={{
-                        textAlign: "center",
-                        fontSize: "18px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {member.prMerge}
-                    </td>
-                    <td>{member.name}</td>
-                    <td style={{ textAlign: "center" }}>
-                      {member.typeingSpeed}
-                    </td>
-                    <td style={{ textAlign: "center" }}>
-                      {member.keyboardOrMouse}
-                    </td>
-                    <td style={{ textAlign: "center" }}>
-                      {member.leetcodeScore}
-                    </td>
-                  </tr>
+                {teamMembers.map((member, i) => (
+                  <MemberRow member={member} key={i} i={i} />
                 ))}
               </tbody>
             </table>
@@ -149,4 +155,168 @@ function LeaderBoard(members) {
       </main>
     </div>
   );
+}
+
+function MemberRow({ member, i }) {
+  const [modalIsOpen, setIsOpen] = useState(false);
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = "#f00";
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  return (
+    <tr key={i}>
+      <td
+        style={{
+          textAlign: "center",
+          fontSize: "18px",
+          fontWeight: "bold",
+        }}
+      >
+        {i + 1}
+      </td>
+      <td
+        style={{
+          textAlign: "center",
+          fontSize: "18px",
+          fontWeight: "bold",
+        }}
+      >
+        {member.prMerge}
+      </td>
+      <td>{member.name}</td>
+      <td style={{ textAlign: "center" }}>{member.typingSpeed}</td>
+      <td style={{ textAlign: "center" }}>{member.keyboardUse}</td>
+      <td style={{ textAlign: "center" }}>{member.leetcodeScore}</td>
+      <td style={{ textAlign: "center" }}>
+        <button onClick={openModal}>edit</button>
+        <Modal
+          isOpen={modalIsOpen}
+          // onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <UpdateScore member={member} />
+        </Modal>
+      </td>
+    </tr>
+  );
+}
+
+function UpdateScore({ member }) {
+
+  const validationSchema = yup.object({
+    prmerge: yup.number('enter a number'),
+    typingSpeed: yup.number('enter a number'),
+    leetcodeScore: yup.number('enter a number'),
+    keyboardUse: yup.string('enter a string'),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      prMerge: member.prMerge,
+      typingSpeed: member.typingSpeed,
+      leetcodeScore: member.leetcodeScore,
+      keyboardUse: member.keyboardUse,
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log(values)
+      const prMerge = values.prMerge;
+      const typingSpeed = values.typingSpeed;
+      const leetcodeScore = values.leetcodeScore;
+      const keyboardUse = values.keyboardUse;
+      console.log(prMerge)
+    },
+  });
+
+  return (
+    <div>
+      <div>{member.name}'s Score</div>
+      <div
+        style={{
+          width: "400px",
+        }}
+      >
+        <form
+          style={{ display: "flex", flexDirection: "column" }}
+          onSubmit={formik.handleSubmit}
+        >
+          <p style={{ fontSize: "14px" }}>PR Merged</p>
+          <input
+            style={{ width: "50%" }}
+            fullWidth
+            id="prMerge"
+            name="prMerge"
+            type="number"
+            value={formik.values.prMerge}
+            onChange={formik.handleChange}
+            error={formik.touched.prMerge && Boolean(formik.errors.prMerge)}
+            helperText={formik.touched.prMerge && formik.errors.prMerge}
+          />
+
+          <p style={{ fontSize: "14px" }}>Typing Speed</p>
+          <input
+            style={{ width: "50%" }}
+            fullWidth
+            id="typingSpeed"
+            name="typingSpeed"
+            type="number"
+            value={formik.values.typingSpeed}
+            onChange={formik.handleChange}
+            error={formik.touched.typingSpeed && Boolean(formik.errors.typingSpeed)}
+            helperText={formik.touched.typingSpeed && formik.errors.typingSpeed}
+          />
+
+          <p style={{ fontSize: "14px" }}>Leetcode Score</p>
+          <input
+            style={{ width: "50%" }}
+            fullWidth
+            id="leetcodeScore"
+            name="leetcodeScore"
+            type="number"
+            value={formik.values.leetcodeScore}
+            onChange={formik.handleChange}
+            error={formik.touched.leetcodeScore && Boolean(formik.errors.leetcodeScore)}
+            helperText={formik.touched.leetcodeScore && formik.errors.leetcodeScore}
+          />
+
+          <p style={{ fontSize: "14px" }}>Keyboard Use</p>
+          <input
+            style={{ width: "50%" }}
+            fullWidth
+            id="keyboardUse"
+            name="keyboardUse"
+            type="text"
+            value={formik.values.keyboardUse}
+            onChange={formik.handleChange}
+            error={formik.touched.keyboardUse && Boolean(formik.errors.keyboardUse)}
+            helperText={formik.touched.keyboardUse && formik.errors.keyboardUse}
+          />
+          <button
+            style={{ width: "50%", marginTop: "15px", borderRadius: "5px" }}
+            color="primary"
+            variant="contained"
+            fullWidth
+            type="submit"
+          >
+            Update
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function Loading() {
+  return <h1>Loading...</h1>;
 }
