@@ -5,7 +5,7 @@ import styles from "../styles/Home.module.css";
 const membersList = [
   {
     name: "Vicky",
-    prMerge: 3,
+    prMerge: 5,
     typeingSpeed: 26,
     keyboardOrMouse: "Low",
     leetcodeScore: 0,
@@ -19,7 +19,7 @@ const membersList = [
   },
   {
     name: "Vikash",
-    prMerge: 5,
+    prMerge: 6,
     typeingSpeed: 7,
     keyboardOrMouse: "Low",
     leetcodeScore: 0,
@@ -48,7 +48,7 @@ const membersList = [
   {
     name: "Arpit",
     prMerge: 0,
-    typeingSpeed: 0,
+    typeingSpeed: 73,
     keyboardOrMouse: "Low",
     leetcodeScore: 0,
   },
