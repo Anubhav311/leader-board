@@ -9,7 +9,7 @@ export function withProtected(Component) {
     if (!currentUser) {
       useEffect(() => {
         router.replace("/login");
-      }, [currentUser]);
+      }, [currentUser]); 
       return <h1>Loading...</h1>;
     }
     return <Component {...props} />;
