@@ -301,7 +301,7 @@ function UpdateScore({ member }) {
 
   return (
     <div>
-      <div>{member.name}'s Score</div>
+      <div>{member.name}&apos;s Score</div>
       <div
         style={{
           width: "400px",

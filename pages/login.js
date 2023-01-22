@@ -131,7 +131,7 @@ const WithMaterialUI = () => {
             marginTop: "30px",
           }}
         >
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link href="/signup">
             <span style={{ textDecoration: "none", color: "#3f51b5" }}>Sign up</span>
           </Link>
