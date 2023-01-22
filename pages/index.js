@@ -11,6 +11,29 @@ import { useAuth } from "../context/AuthContext";
 import Modal from "react-modal";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+} from "@chakra-ui/react";
+import {
+  Image,
+  Flex,
+  Button,
+  HStack,
+  chakra,
+  Container,
+  Heading,
+  Divider,
+  Box,
+  Text,
+} from "@chakra-ui/react";
 
 const customStyles = {
   content: {
@@ -126,33 +149,49 @@ function LeaderBoard({ members, team }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <div>
-          <div>
-            <h3>Epvi Engineering Leader Board</h3>
-          </div>
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>PR Merge</th>
-                  <th>Name</th>
-                  <th>Typeing Speed</th>
-                  <th>Keyboard Use</th>
-                  <th>Leetcode Score</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {teamMembers.map((member, i) => (
-                  <MemberRow member={member} key={i} i={i} />
-                ))}
-              </tbody>
-            </table>
-          </div>
+      <div className={styles.main}>
+        <div className={styles.tableContainer}>
+            <div>
+              <Heading pb="15px" size="md">
+                Epvi Engineering Leader Board
+              </Heading>
+            </div>
+            <Box w='100%' borderWidth="1px" borderRadius="lg" p="15px">
+              <TableContainer w='100%'>
+                <Table variant="simple">
+                  <TableCaption>Epvi Engineering Leader Board</TableCaption>
+                  <Thead>
+                    <Tr>
+                      <Th isNumeric>Rank</Th>
+                      <Th isNumeric>PR Merge</Th>
+                      <Th>Name</Th>
+                      <Th isNumeric>Typing Speed</Th>
+                      <Th>Keyboard Use</Th>
+                      <Th></Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {teamMembers.map((member, i) => (
+                      <MemberRow member={member} key={i} i={i} />
+                    ))}
+                  </Tbody>
+                </Table>
+              </TableContainer>
+            </Box>
         </div>
-      </main>
+        <div
+          className={styles.thirdColumn}
+          style={
+            {
+              position:"fixed",
+              right: "30px",
+            }
+          }
+        >
+          <h3>2022</h3>
+          <h3>2022</h3>
+        </div>
+      </div>
     </div>
   );
 }
@@ -173,7 +212,28 @@ function MemberRow({ member, i }) {
   }
 
   return (
-    <tr key={i}>
+    <>
+      <Tr key={i}>
+        <Td textAlign={"center"}>{i + 1}</Td>
+        <Td textAlign={"center"}>{member.prMerge}</Td>
+        <Td>{member.name}</Td>
+        <Td textAlign={"center"}>{member.typingSpeed}</Td>
+        <Td textAlign={"center"}>{member.keyboardUse}</Td>
+        <Td>
+          <button onClick={openModal}>edit</button>
+          <Modal
+            isOpen={modalIsOpen}
+            // onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+            <UpdateScore member={member} />
+          </Modal>
+        </Td>
+      </Tr>
+
+      {/* <tr key={i}>
       <td
         style={{
           textAlign: "center",
@@ -208,17 +268,17 @@ function MemberRow({ member, i }) {
           <UpdateScore member={member} />
         </Modal>
       </td>
-    </tr>
+    </tr> */}
+    </>
   );
 }
 
 function UpdateScore({ member }) {
-
   const validationSchema = yup.object({
-    prmerge: yup.number('enter a number'),
-    typingSpeed: yup.number('enter a number'),
-    leetcodeScore: yup.number('enter a number'),
-    keyboardUse: yup.string('enter a string'),
+    prmerge: yup.number("enter a number"),
+    typingSpeed: yup.number("enter a number"),
+    leetcodeScore: yup.number("enter a number"),
+    keyboardUse: yup.string("enter a string"),
   });
 
   const formik = useFormik({
@@ -230,12 +290,12 @@ function UpdateScore({ member }) {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values)
+      console.log(values);
       const prMerge = values.prMerge;
       const typingSpeed = values.typingSpeed;
       const leetcodeScore = values.leetcodeScore;
       const keyboardUse = values.keyboardUse;
-      console.log(prMerge)
+      console.log(prMerge);
     },
   });
 
@@ -273,7 +333,9 @@ function UpdateScore({ member }) {
             type="number"
             value={formik.values.typingSpeed}
             onChange={formik.handleChange}
-            error={formik.touched.typingSpeed && Boolean(formik.errors.typingSpeed)}
+            error={
+              formik.touched.typingSpeed && Boolean(formik.errors.typingSpeed)
+            }
             helperText={formik.touched.typingSpeed && formik.errors.typingSpeed}
           />
 
@@ -286,8 +348,13 @@ function UpdateScore({ member }) {
             type="number"
             value={formik.values.leetcodeScore}
             onChange={formik.handleChange}
-            error={formik.touched.leetcodeScore && Boolean(formik.errors.leetcodeScore)}
-            helperText={formik.touched.leetcodeScore && formik.errors.leetcodeScore}
+            error={
+              formik.touched.leetcodeScore &&
+              Boolean(formik.errors.leetcodeScore)
+            }
+            helperText={
+              formik.touched.leetcodeScore && formik.errors.leetcodeScore
+            }
           />
 
           <p style={{ fontSize: "14px" }}>Keyboard Use</p>
@@ -299,7 +366,9 @@ function UpdateScore({ member }) {
             type="text"
             value={formik.values.keyboardUse}
             onChange={formik.handleChange}
-            error={formik.touched.keyboardUse && Boolean(formik.errors.keyboardUse)}
+            error={
+              formik.touched.keyboardUse && Boolean(formik.errors.keyboardUse)
+            }
             helperText={formik.touched.keyboardUse && formik.errors.keyboardUse}
           />
           <button
