@@ -157,7 +157,7 @@ function LeaderBoard({ members, team }) {
               </Heading>
             </div>
             <Box w='100%' borderWidth="1px" borderRadius="lg" p="15px">
-              <TableContainer w='100%'>
+              <TableContainer w='100%'> 
                 <Table variant="simple">
                   <TableCaption>Epvi Engineering Leader Board</TableCaption>
                   <Thead>
