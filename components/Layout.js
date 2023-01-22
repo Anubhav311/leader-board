@@ -14,6 +14,7 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react";
+import Link from "next/link";
 
 const data = [
   {
@@ -33,9 +34,12 @@ function Header() {
         zIndex='200'
       >
         <Flex h='70px' w="100%" px="6" py="5" align="center" justify="space-between">
+        <Link href="/">
+
           <Heading ml='20px' as="h2" size="md">
             LeaderBoard
           </Heading>
+        </Link>
           {/* <HStack as="nav" spacing="5">
             {data.map((item, i) => (
               <Button variant="nav"> {item.label} </Button>
@@ -43,7 +47,19 @@ function Header() {
           </HStack> */}
           <HStack mr='20px'>
             <Button colorScheme='green' mr='20px'>Create</Button>
+            <Link href="/profile">
+            {/* <span
+              style={{
+                fontSize: "14px",
+                color: "#3f51b5",
+                marginLeft: "auto",
+                marginTop: "15px",
+              }}
+            >
+              Forgot password
+            </span> */}
             <Button variant='link'>Profile</Button>
+          </Link>
           </HStack>
         </Flex>
         <Divider />
@@ -72,10 +88,10 @@ export default function Layout({ userRole, children }) {
           }}
         >
           <Box w="20%" p={5} h="100%" display='flex' flexDirection='column' pt="90px">
-            <Text fontWeight='500' fontSize=".875rem"> Teams </Text>
-            <Text fontWeight='500' fontSize=".875rem"> Teams </Text>
-            <Text fontWeight='500' fontSize=".875rem"> Teams </Text>
-            <Text fontWeight='500' fontSize=".875rem"> Teams </Text>
+            <Text p={3} fontWeight='500' fontSize=".875rem"> Teams </Text>
+            <Text p={3} fontWeight='500' fontSize=".875rem"> Teams </Text>
+            <Text p={3} fontWeight='500' fontSize=".875rem"> Teams </Text>
+            <Text p={3} fontWeight='500' fontSize=".875rem"> Teams </Text>
           </Box>
           {children}
         </div>

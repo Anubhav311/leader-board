@@ -5,6 +5,8 @@ import * as yup from "yup";
 import "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+import { Button, Input } from '@chakra-ui/react'
+import Link from "next/link";
 
 const validationSchema = yup.object({
   email: yup
@@ -70,7 +72,7 @@ const WithMaterialUI = () => {
           onSubmit={formik.handleSubmit}
         >
           <p style={{ fontSize: "14px" }}>Email</p>
-          <input
+          <Input
             style={{ width: "50%" }}
             fullWidth
             id="email"
@@ -80,12 +82,13 @@ const WithMaterialUI = () => {
             onChange={formik.handleChange}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
-            variant="outlined"
+            variant="outline"
             placeholder="Enter your email"
+            marginBottom='30px'
           />
           <p style={{ fontSize: "14px" }}>Password</p>
 
-          <input
+          <Input
             style={{ width: "50%" }}
             fullWidth
             name="password"
@@ -95,11 +98,12 @@ const WithMaterialUI = () => {
             onChange={formik.handleChange}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
-            variant="outlined"
+            variant="outline"
             placeholder="Enter your password"
+            marginBottom='30px'
           />
           <p style={{ fontSize: "14px" }}>Confirm Password</p>
-          <input
+          <Input
             style={{ width: "50%" }}
             fullWidth
             type="password"
@@ -114,20 +118,34 @@ const WithMaterialUI = () => {
             helperText={
               formik.touched.changepassword && formik.errors.changepassword
             }
-            variant="outlined"
+            variant="outline"
             placeholder="Confirm Password"
+            marginBottom='30px'
           />
-          <button
+          <Button
             style={{ width: "50%", marginTop: "25px", borderRadius: "5px" }}
-            color="primary"
-            variant="contained"
+            colorScheme="green"
+            variant="solid"
             fullWidth
             type="submit"
           >
             Sign up
-          </button>
+          </Button>
         </form>
-      </div>
+        <p
+          style={{
+            fontSize: "14px",
+            marginLeft: "10%",
+            color: "grey",
+            marginTop: "30px",
+          }}
+        >
+          Already have an account?{" "}
+          <Link href="/login">
+            <span style={{ textDecoration: "none", color: "#3f51b5" }}>Login</span>
+          </Link>
+        </p>
+              </div>
     </>
   );
 };

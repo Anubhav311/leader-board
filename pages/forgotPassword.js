@@ -4,6 +4,8 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import "../firebaseConfig";
 import { auth } from "../firebaseConfig";
+import { Button, Input } from '@chakra-ui/react'
+import Link from "next/link";
 
 const ForgotPassword = () => {
   const validationSchema = yup.object({
@@ -51,7 +53,7 @@ const ForgotPassword = () => {
           onSubmit={formik.handleSubmit}
         >
           <p style={{ fontSize: "14px" }}>Email</p>
-          <input
+          <Input
             style={{ width: "50%" }}
             fullWidth
             id="email"
@@ -61,19 +63,33 @@ const ForgotPassword = () => {
             onChange={formik.handleChange}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
-            variant="outlined"
+            variant="outline"
             placeholder="Enter your email"
+            marginBottom="20px"
           />
-          <button
+          <Button
             style={{ width: "50%", marginTop: "25px", borderRadius: "5px" }}
-            color="primary"
-            variant="contained"
+            colorScheme="green"
+            variant="solid"
             fullWidth
             type="submit"
           >
             Send email
-          </button>
+          </Button>
         </form>
+        <p
+          style={{
+            fontSize: "14px",
+            // marginLeft: "10%",
+            color: "grey",
+            marginTop: "30px",
+          }}
+        >
+          Try logging in{" "}
+          <Link href="/login">
+            <span style={{ textDecoration: "none", color: "#3f51b5" }}>Login</span>
+          </Link>
+        </p>
       </div>
     </>
   );

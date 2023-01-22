@@ -6,7 +6,7 @@ import "../firebaseConfig";
 import { auth } from "../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuth } from "../context/AuthContext";
-
+import { Button, Input } from '@chakra-ui/react'
 import Link from "next/link";
 
 const validationSchema = yup.object({
@@ -64,17 +64,14 @@ const WithMaterialUI = () => {
           marginLeft: "37%",
         }}
       >
-        <h1 style={{ marginTop: "15vh" }}>Welcome to EPVI</h1>
-        <p style={{ marginTop: "25px", marginBottom: "30px", color: "grey" }}>
-          Please Enter your details.
-        </p>
+        <h1 style={{ marginTop: "15vh", marginBottom: "30px" }}>Welcome Back!!!</h1>
 
         <form
           style={{ display: "flex", flexDirection: "column" }}
           onSubmit={formik.handleSubmit}
         >
           <p style={{ fontSize: "14px" }}>Email</p>
-          <input
+          <Input
             style={{ width: "50%" }}
             fullWidth
             id="email"
@@ -83,12 +80,13 @@ const WithMaterialUI = () => {
             onChange={formik.handleChange}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
-            variant="outlined"
+            variant="outline"
             placeholder="Enter your email"
+            marginBottom='30px'
           />
           <p style={{ fontSize: "14px" }}>Password</p>
 
-          <input
+          <Input
             style={{ width: "50%" }}
             fullWidth
             id="password"
@@ -98,30 +96,31 @@ const WithMaterialUI = () => {
             onChange={formik.handleChange}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
-            variant="outlined"
+            variant="outline"
             placeholder="Enter your password"
+            marginBottom='30px'
           />
           <Link href="/forgotPassword">
             <span
               style={{
                 fontSize: "14px",
                 color: "#3f51b5",
-                marginLeft: "17%",
+                marginLeft: "auto",
                 marginTop: "15px",
               }}
             >
               Forgot password
             </span>
           </Link>
-          <button
+          <Button
             style={{ width: "50%", marginTop: "15px", borderRadius: "5px" }}
-            color="primary"
-            variant="contained"
+            colorScheme="green"
+            variant="solid"
             fullWidth
             type="submit"
           >
-            Sign in
-          </button>
+            Login
+          </Button>
         </form>
         <p
           style={{
