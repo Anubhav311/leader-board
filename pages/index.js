@@ -111,7 +111,7 @@ export default function Home() {
     if (loading == false) {
       getUser(uid, setUserData);
     }
-  }, [loading]);
+  }, [loading, uid]);
 
   return userData == undefined ? (
     <Loading />
@@ -124,7 +124,7 @@ function GetTeams({ uid, members, userData }) {
   const [teams, setTeams] = useState([]);
   useEffect(() => {
     getTeams(uid, setTeams);
-  }, []);
+  }, [uid]);
 
   return teams.length == 0 ? (
     <Loading />
@@ -139,7 +139,7 @@ function LeaderBoard({ members, team }) {
 
   useEffect(() => {
     getTeamMembers(team, setTeamMembers);
-  }, []);
+  }, [team]);
 
   return (
     <div className={styles.container}>
