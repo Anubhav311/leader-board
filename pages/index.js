@@ -26,7 +26,7 @@ const membersList = [
   },
   {
     name: "Harsh",
-    prMerge: 2,
+    prMerge: 7,
     typeingSpeed: 28,
     keyboardOrMouse: "Low",
     leetcodeScore: 0,
@@ -40,7 +40,7 @@ const membersList = [
   },
   {
     name: "Asif",
-    prMerge: 1,
+    prMerge: 4,
     typeingSpeed: 0,
     keyboardOrMouse: "Low",
     leetcodeScore: 0,
