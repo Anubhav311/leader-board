@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthContext";
+import Loading from "./Loading";
 
 export function withProtected(Component) {
   return function WithProtected(props) {
@@ -10,7 +11,7 @@ export function withProtected(Component) {
       useEffect(() => {
         router.replace("/login");
       }, [currentUser]); 
-      return <h1>Loading...</h1>;
+      return <Loading />;
     }
     return <Component {...props} />;
   };

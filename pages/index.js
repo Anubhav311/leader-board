@@ -15,25 +15,15 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
   TableCaption,
   TableContainer,
-} from "@chakra-ui/react";
-import {
-  Image,
-  Flex,
-  Button,
-  HStack,
-  chakra,
-  Container,
   Heading,
-  Divider,
   Box,
-  Text,
 } from "@chakra-ui/react";
+import Loading from "../components/Loading";
 import Layout from "../components/Layout";
 import { withProtected } from "../components/ProtectedRoute";
 
@@ -126,8 +116,8 @@ function GetTeams({ uid, members, userData }) {
     getTeams(uid, setTeams);
   }, [uid]);
 
-  return teams.length == 0 ? (
-    <Loading />
+    return teams.length == 0 ? (
+    <Loading/>
   ) : (
     <LeaderBoard members={members} team={teams[0]} />
   );
@@ -346,8 +336,5 @@ function UpdateScore({ member }) {
   );
 }
 
-function Loading() {
-  return <h1>Loading...</h1>;
-}
 
 export default withProtected(Home);
