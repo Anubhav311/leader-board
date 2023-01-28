@@ -1,15 +1,30 @@
 .container {
   padding: 0 2rem;
+  margin: 0;
+  height: 100%;
+  overflow: scroll;
+  width: 100%;
+  z-index: 0;
+  padding-top: 90px;
 }
 
 .main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  scroll-behavior: auto;
+  z-index: 0;
+}
+
+
+.tableContainer {
+  width: 65%;
+}
+
+.thirdColumn {
+  position: fixed;
+  right: 30px;
+  width: 20%;
 }
 
 .footer {
